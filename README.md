@@ -6,10 +6,9 @@ theme, so every Shibuya option still works.
 
 It adds:
 
-- **Looks**: `rtd` (sphinx_rtd_theme's blues, code and API signatures), `alabaster`, `scipy`
-  (SciPy's docs: pydata-sphinx-theme's colors, system fonts, underlined links), and `pydata`
-  (pydata-sphinx-theme's own docs: the same, in its newer system fonts), each a palette, fonts and
-  styling, with a dark mode. Change any color or font with a CSS variable.
+- **Looks**: `rtd` (sphinx_rtd_theme's blues, code and API signatures), `alabaster`, and `pydata`
+  (pydata-sphinx-theme's docs, as NumPy and SciPy use: system fonts, underlined links), each a
+  palette, fonts and styling, with a dark mode. Change any color or font with a CSS variable.
   See them all in the [demo](https://arsenovic.github.io/shibuya-page/), which has a switcher.
 - **Breadcrumbs** above each page, with a **Download** link on notebook pages.
 - **A thumbnail gallery** of pages (`shibuya_page.gallery`), for notebooks from MyST-NB or any
@@ -52,14 +51,14 @@ shibuya-page's options sit beside Shibuya's in `html_theme_options`.
 
 | Option                   | Default         | Effect |
 | ------------------------ | --------------- | ------ |
-| `look`                   | `"rtd"`         | `"rtd"`, `"alabaster"`, `"scipy"`, `"pydata"`, or `"none"` to set every `--sp-*` variable yourself. |
+| `look`                   | `"rtd"`         | `"rtd"`, `"alabaster"`, `"pydata"`, or `"none"` to set every `--sp-*` variable yourself. |
 | `webfonts`               | `"auto"`        | `"auto"` loads the look's fonts. Or a stylesheet URL that loads your own, named with `--sp-font-*`; or `""` for none. |
 | `prune_page_headings`    | `True`          | The left sidebar leaves out a page's own headings (the right sidebar lists them), but keeps headings that group other pages. |
 | `external_links_new_tab` | `True`          | Links that leave the site open in a new tab. |
 | `download_notebooks`     | `True`          | Notebook pages get a Download link for their source at the end of the breadcrumbs. Needs `html_copy_source` (on by default). |
 
 Code is highlighted with the look's Pygments styles: `sphinx` and `github-dark` (light and dark)
-for rtd and alabaster, and `a11y-high-contrast-light` and `-dark` for scipy and pydata, as they use. Set
+for rtd and alabaster, and `a11y-high-contrast-light` and `-dark` for pydata, as it uses. Set
 `pygments_style` in `conf.py` to choose your own.
 
 ## Colors and fonts

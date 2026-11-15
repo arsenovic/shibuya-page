@@ -1,5 +1,5 @@
-/* The pydata look: pydata-sphinx-theme's own docs, as of 0.24. The same colors and styling as the
-   scipy look (SciPy uses an older pydata-sphinx-theme), with pydata's newer system font stacks. */
+/* The pydata look: pydata-sphinx-theme's own docs, as of 0.24, which NumPy and SciPy use too. System
+   fonts, a white navbar, underlined links, and its inline code, signatures and admonitions. */
 
 :root {
   --sp-font-text: system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
@@ -49,7 +49,7 @@
   --sp-sig-name: #912583;
 }
 
-/* Dark mode: a near-black page, and the teal and purple lightened. */
+/* pydata-sphinx-theme's dark mode: a near-black page, and the teal and purple lightened. */
 html.dark {
   --sp-desk: #0d1014;
   --sp-scroll-thumb: #48566b;

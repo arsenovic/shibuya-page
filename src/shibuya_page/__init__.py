@@ -23,9 +23,7 @@ LATO_ROBOTO = (
 LOOKS: dict[str, dict[str, Any]] = {
     "rtd": {"webfonts": LATO_ROBOTO},
     "alabaster": {"webfonts": LATO_ROBOTO},
-    # SciPy's docs (pydata-sphinx-theme, in SciPy's colors)
-    "scipy": {"webfonts": "", "pygments": ("a11y-high-contrast-light", "a11y-high-contrast-dark")},
-    # pydata-sphinx-theme's own docs: the scipy look, in pydata's newer system fonts
+    # pydata-sphinx-theme's docs (and NumPy's and SciPy's), in system fonts
     "pydata": {"webfonts": "", "pygments": ("a11y-high-contrast-light", "a11y-high-contrast-dark")},
 }
 
