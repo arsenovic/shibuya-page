@@ -6,3 +6,4 @@ build/
 _build/
 jupyter_execute/
 .ipynb_checkpoints/
+_demo/

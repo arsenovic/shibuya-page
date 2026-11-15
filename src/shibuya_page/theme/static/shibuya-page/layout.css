@@ -1,10 +1,7 @@
-/* Shibuya, laid out as a sheet of paper on a desk. Every color is a --sp-* variable, which the
-   palette stylesheet (palettes/*.css) sets, in light and dark. */
+/* Shibuya, laid out as a sheet of paper on a desk. Every color and font is a --sp-* variable, which
+   the look (looks/*.css) sets, in light and dark. */
 
 :root {
-  --sp-font-text: "Lato", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
-  --sp-font-heading: "Roboto Slab", Georgia, serif;
-  --sp-font-mono: "Roboto Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --sp-logo-size: 36px;
   --sp-page-radius: 8px;
 
@@ -76,7 +73,7 @@ body {
   }
 }
 
-/* The navbar, a solid band in the palette's nav color. */
+/* The navbar, a solid band in the look's nav color. */
 .sy-head-blur {
   background-color: var(--sp-nav-bg);
   backdrop-filter: none;
@@ -242,7 +239,7 @@ pre.literal-block {
   border-radius: 0;
 }
 
-/* In light mode, text pygments leaves untagged keeps the palette's code color. */
+/* In light mode, text pygments leaves untagged keeps the look's code color. */
 html:not(.dark) .highlight {
   --syntax-text: var(--sp-code-block-text);
 }

@@ -1,6 +1,10 @@
-/* The sphinx_rtd_theme palette, with rtd's code cells, inline code, API signatures and admonitions. */
+/* The sphinx_rtd_theme look: its palette, with rtd's code cells, inline code, API signatures and admonitions. */
 
 :root {
+  --sp-font-text: "Lato", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sp-font-heading: "Roboto Slab", Georgia, serif;
+  --sp-font-mono: "Roboto Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
   --sp-desk: #e9e7e3;
   --sp-scroll-thumb: #c4c0b9;
   --sp-page: #fcfcfc;

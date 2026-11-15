@@ -1,5 +1,5 @@
 /* shibuya_page.gallery: a grid of cards, each a thumbnail over the page's title. The colors come from
-   shibuya-page's palette, with fallbacks for other themes. */
+   shibuya-page's look, with fallbacks for other themes. */
 .sp-gallery {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 13rem), 1fr));

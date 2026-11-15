@@ -10,7 +10,18 @@ from sphinx.util import logging
 __version__ = "0.1.0"
 
 THEME_PATH = Path(__file__).parent / "theme"
-PALETTES = ("rtd", "alabaster")
+
+LATO_ROBOTO = (
+    "https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700;900"
+    "&family=Lato:ital,wght@0,400;0,700;1,400&family=Roboto+Mono:wght@400;700&display=swap"
+)
+
+# Each look is theme/static/shibuya-page/looks/<name>.css, which sets every --sp-* variable, and the
+# fonts it names. To add one, add its stylesheet and an entry here; tests/test_looks.py checks it.
+LOOKS: dict[str, dict[str, str]] = {
+    "rtd": {"webfonts": LATO_ROBOTO},
+    "alabaster": {"webfonts": LATO_ROBOTO},
+}
 
 logger = logging.getLogger(__name__)
 
@@ -36,14 +47,17 @@ def _on_builder_inited(app: Sphinx) -> None:
     if not _uses_theme(app):
         return
     options = _options(app)
-    palette = options["palette"]
-    if palette in PALETTES:
+    look = options["look"]
+    if look in LOOKS:
         # after the theme's layout (200), before the project's own html_css_files (800)
-        app.add_css_file(f"shibuya-page/palettes/{palette}.css", priority=300)
-    elif palette != "none":
-        logger.warning(
-            "shibuya-page: unknown palette %r; use one of %s, or 'none'", palette, ", ".join(PALETTES)
-        )
+        app.add_css_file(f"shibuya-page/looks/{look}.css", priority=300)
+    elif look != "none":
+        logger.warning("shibuya-page: unknown look %r; use one of %s, or 'none'", look, ", ".join(LOOKS))
+    webfonts = options["webfonts"]
+    if webfonts == "auto":
+        webfonts = LOOKS.get(look, {}).get("webfonts", "")
+    if webfonts:
+        app.add_css_file(webfonts, priority=300)
     if _flag(options["prune_page_headings"]):
         app.add_css_file("shibuya-page/prune-page-headings.css", priority=300)
     if _flag(options["external_links_new_tab"]):

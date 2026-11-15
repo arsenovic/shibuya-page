@@ -6,8 +6,9 @@ theme, so every Shibuya option still works.
 
 It adds:
 
-- **Palettes**: `rtd` (sphinx_rtd_theme's blues, code and API signatures) and `alabaster`, each
-  with a dark mode. Change any color with a CSS variable.
+- **Looks**: `rtd` (sphinx_rtd_theme's blues, code and API signatures) and `alabaster`, each a
+  palette, fonts and styling, with a dark mode. Change any color or font with a CSS variable.
+  See them all in the [demo](https://arsenovic.github.io/shibuya-page/), which has a switcher.
 - **Breadcrumbs** above each page, with a **Download** link on notebook pages.
 - **A thumbnail gallery** of pages (`shibuya_page.gallery`), for notebooks from MyST-NB or any
   other source.
@@ -31,7 +32,7 @@ In `conf.py`:
 ```python
 html_theme = "shibuya-page"
 html_theme_options = {
-    "palette": "rtd",
+    "look": "rtd",
     # any Shibuya option: https://shibuya.lepture.com/customisation/
     "light_logo": "_static/logo.svg",
     "github_url": "https://github.com/you/project",
@@ -49,8 +50,8 @@ shibuya-page's options sit beside Shibuya's in `html_theme_options`.
 
 | Option                   | Default         | Effect |
 | ------------------------ | --------------- | ------ |
-| `palette`                | `"rtd"`         | `"rtd"`, `"alabaster"`, or `"none"` to set every `--sp-*` variable yourself. |
-| `webfonts`               | Google Fonts URL for Lato, Roboto Slab and Roboto Mono | A stylesheet that loads the fonts; `""` loads none. Name the fonts with `--sp-font-*`. |
+| `look`                   | `"rtd"`         | `"rtd"`, `"alabaster"`, or `"none"` to set every `--sp-*` variable yourself. |
+| `webfonts`               | `"auto"`        | `"auto"` loads the look's fonts. Or a stylesheet URL that loads your own, named with `--sp-font-*`; or `""` for none. |
 | `prune_page_headings`    | `True`          | The left sidebar leaves out a page's own headings (the right sidebar lists them), but keeps headings that group other pages. |
 | `external_links_new_tab` | `True`          | Links that leave the site open in a new tab. |
 | `download_notebooks`     | `True`          | Notebook pages get a Download link for their source at the end of the breadcrumbs. Needs `html_copy_source` (on by default). |
@@ -88,10 +89,21 @@ html.dark {
 | `--sp-code-bg`, `--sp-code-text`, `--sp-code-border` | Inline code |
 | `--sp-sidebar-link`, `--sp-sidebar-link-hover` | Sidebar links |
 | `--sp-nav-bg`, `--sp-nav-text`, `--sp-nav-hover` | The navbar |
-| `--sp-note-*`, `--sp-warn-*`, `--sp-sig-*`, `--sp-member-*` | Admonitions and API signatures, in the palette that styles them |
+| `--sp-note-*`, `--sp-warn-*`, `--sp-sig-*`, `--sp-member-*` | Admonitions and API signatures, in the looks that style them |
 | `--sp-font-text`, `--sp-font-heading`, `--sp-font-mono` | Fonts |
 | `--sp-logo-size`, `--sp-page-radius` | The logo's height, and the page's corners |
 | `--sp-gallery-placeholder` | The image on gallery cards for pages without one, such as `url("logo.svg")` |
+
+## Adding a look
+
+A look is one stylesheet, `src/shibuya_page/theme/static/shibuya-page/looks/<name>.css`, and an
+entry in `LOOKS` in `src/shibuya_page/__init__.py` naming its fonts. The stylesheet sets every
+`--sp-*` variable on `:root`, changes the ones it needs under `html.dark`, and may restyle code,
+links, headings and admonitions. Copying `rtd.css` is the easiest start.
+
+`just test` checks that each look sets every variable the layout uses, and `just demo` builds
+reasonable-docs-template in every look, with a switcher, into `_demo/site` (`just serve-demo` serves
+it). The CI publishes that demo.
 
 ## Gallery
 
@@ -150,10 +162,12 @@ still win over both.
 
 ```sh
 uv sync
+just test
+just demo        # needs reasonable-docs-template beside this repo
 ```
 
-The [CI](.github/workflows/docs.yml) builds reasonable-docs-template with this theme in each palette,
-and against the newest Shibuya every week.
+The [CI](.github/workflows/docs.yml) runs the tests, builds the demo against the locked and the
+newest Shibuya (weekly too), and publishes it.
 
 ## Licence
 
