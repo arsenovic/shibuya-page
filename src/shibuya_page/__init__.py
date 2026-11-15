@@ -16,11 +16,15 @@ LATO_ROBOTO = (
     "&family=Lato:ital,wght@0,400;0,700;1,400&family=Roboto+Mono:wght@400;700&display=swap"
 )
 
-# Each look is theme/static/shibuya-page/looks/<name>.css, which sets every --sp-* variable, and the
-# fonts it names. To add one, add its stylesheet and an entry here; tests/test_looks.py checks it.
-LOOKS: dict[str, dict[str, str]] = {
+# Each look is theme/static/shibuya-page/looks/<name>.css, which sets every --sp-* variable; the
+# stylesheet that loads the fonts it names ("" for system fonts); and, optionally, the Pygments styles
+# for code in light and dark mode, in place of the theme's. To add one, add its stylesheet and an
+# entry here; tests/test_looks.py checks it.
+LOOKS: dict[str, dict[str, Any]] = {
     "rtd": {"webfonts": LATO_ROBOTO},
     "alabaster": {"webfonts": LATO_ROBOTO},
+    # SciPy's docs (pydata-sphinx-theme, in SciPy's colors)
+    "scipy": {"webfonts": "", "pygments": ("a11y-high-contrast-light", "a11y-high-contrast-dark")},
 }
 
 logger = logging.getLogger(__name__)
@@ -41,6 +45,15 @@ def _uses_theme(app: Sphinx) -> bool:
 
 def _options(app: Sphinx) -> dict[str, Any]:
     return app.builder.theme.get_options(app.builder.theme_options)
+
+
+def _set_look_pygments(app: Sphinx) -> None:
+    """Give the theme the look's Pygments styles, before Shibuya reads them to build its highlighter."""
+    if not _uses_theme(app):
+        return
+    styles = LOOKS.get(_options(app)["look"], {}).get("pygments")
+    if styles:
+        app.builder.theme.pygments_style_default, app.builder.theme.pygments_style_dark = styles
 
 
 def _on_builder_inited(app: Sphinx) -> None:
@@ -90,6 +103,8 @@ def _on_page_context(
 def setup(app: Sphinx) -> dict[str, Any]:
     app.setup_extension("shibuya")
     app.add_html_theme("shibuya-page", str(THEME_PATH))
+    # before Shibuya's builder-inited (500), which builds the highlighter from the theme's styles
+    app.connect("builder-inited", _set_look_pygments, priority=400)
     app.connect("builder-inited", _on_builder_inited)
     app.connect("html-page-context", _on_page_context)
     return {"version": __version__, "parallel_read_safe": True, "parallel_write_safe": True}

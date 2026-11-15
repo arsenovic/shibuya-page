@@ -6,8 +6,9 @@ theme, so every Shibuya option still works.
 
 It adds:
 
-- **Looks**: `rtd` (sphinx_rtd_theme's blues, code and API signatures) and `alabaster`, each a
-  palette, fonts and styling, with a dark mode. Change any color or font with a CSS variable.
+- **Looks**: `rtd` (sphinx_rtd_theme's blues, code and API signatures), `alabaster`, and `scipy`
+  (SciPy's docs: pydata-sphinx-theme's colors, system fonts, underlined links), each a palette,
+  fonts and styling, with a dark mode. Change any color or font with a CSS variable.
   See them all in the [demo](https://arsenovic.github.io/shibuya-page/), which has a switcher.
 - **Breadcrumbs** above each page, with a **Download** link on notebook pages.
 - **A thumbnail gallery** of pages (`shibuya_page.gallery`), for notebooks from MyST-NB or any
@@ -50,13 +51,14 @@ shibuya-page's options sit beside Shibuya's in `html_theme_options`.
 
 | Option                   | Default         | Effect |
 | ------------------------ | --------------- | ------ |
-| `look`                   | `"rtd"`         | `"rtd"`, `"alabaster"`, or `"none"` to set every `--sp-*` variable yourself. |
+| `look`                   | `"rtd"`         | `"rtd"`, `"alabaster"`, `"scipy"`, or `"none"` to set every `--sp-*` variable yourself. |
 | `webfonts`               | `"auto"`        | `"auto"` loads the look's fonts. Or a stylesheet URL that loads your own, named with `--sp-font-*`; or `""` for none. |
 | `prune_page_headings`    | `True`          | The left sidebar leaves out a page's own headings (the right sidebar lists them), but keeps headings that group other pages. |
 | `external_links_new_tab` | `True`          | Links that leave the site open in a new tab. |
 | `download_notebooks`     | `True`          | Notebook pages get a Download link for their source at the end of the breadcrumbs. Needs `html_copy_source` (on by default). |
 
-The theme also sets Pygments styles, `sphinx` in light mode and `github-dark` in dark mode. Set
+Code is highlighted with the look's Pygments styles: `sphinx` and `github-dark` (light and dark)
+for rtd and alabaster, and `a11y-high-contrast-light` and `-dark` for scipy, as SciPy uses. Set
 `pygments_style` in `conf.py` to choose your own.
 
 ## Colors and fonts
@@ -97,7 +99,8 @@ html.dark {
 ## Adding a look
 
 A look is one stylesheet, `src/shibuya_page/theme/static/shibuya-page/looks/<name>.css`, and an
-entry in `LOOKS` in `src/shibuya_page/__init__.py` naming its fonts. The stylesheet sets every
+entry in `LOOKS` in `src/shibuya_page/__init__.py` naming its fonts and, optionally, its Pygments
+styles. The stylesheet sets every
 `--sp-*` variable on `:root`, changes the ones it needs under `html.dark`, and may restyle code,
 links, headings and admonitions. Copying `rtd.css` is the easiest start.
 

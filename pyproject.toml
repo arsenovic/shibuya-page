@@ -13,6 +13,8 @@ dependencies = [
     "sphinx>=9.1",
     # theme/components/breadcrumbs.html is a copy of Shibuya 2026.7.12's; check it against each new release
     "shibuya>=2026.7.12,<2027",
+    # Pygments styles for the scipy look
+    "accessible-pygments>=0.0.5",
 ]
 keywords = ["sphinx", "theme", "documentation", "shibuya"]
 classifiers = [
