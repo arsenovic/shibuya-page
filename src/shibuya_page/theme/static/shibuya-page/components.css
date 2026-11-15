@@ -59,8 +59,11 @@
   margin-bottom: 0;
 }
 
+/* A definite width: a percentage would size the column to the image's own width. */
 .yue .sp-side-by-side img {
-  max-width: min(100%, 260px);
+  width: var(--sp-side-figure-width, 260px);
+  max-width: 100%;
+  height: auto;
   margin: 0;
 }
 

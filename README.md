@@ -142,6 +142,9 @@ basics/*
 ```
 ````
 
+`:links-only:` draws the cards without the toctree, so the pages stay where the rest of the
+toctree puts them; use it to show a few examples on a landing page.
+
 A card's image is, in order:
 
 1. the page's `thumbnail` front matter (`:thumbnail:` in reStructuredText), a path from the page;
@@ -160,7 +163,7 @@ Classes for a project's home page. Give an element one with `rst-class` (reStruc
 | Class            | On                | Effect |
 | ---------------- | ----------------- | ------ |
 | `sp-features`    | a bulleted list   | Flows down two columns; items with sublists get bold labels. |
-| `sp-side-by-side`| a container       | Its children side by side, text then a figure; stacked on phones. |
+| `sp-side-by-side`| a container       | Its children side by side, text then a figure (`--sp-side-figure-width` wide, 260px by default); stacked on phones. |
 | `sp-cards`       | a list-table      | A grid of cards, one per cell, each an image over a caption. |
 | `sp-title-image` | a section         | Hides its h1 visually, for a title graphic (`img.sp-title`) in its place. |
 | `sp-light-only`, `sp-dark-only` | an image | Shown in one color mode. |

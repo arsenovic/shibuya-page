@@ -17,6 +17,7 @@ from pathlib import Path
 from typing import Any
 
 from docutils import nodes
+from docutils.parsers.rst import directives
 from sphinx import addnodes
 from sphinx.application import Sphinx
 from sphinx.directives.other import TocTree
@@ -36,12 +37,19 @@ class gallery(nodes.General, nodes.Element):
 
 
 class Gallery(TocTree):
-    """``toctree``, with its options, drawn as cards. The toctree stays, hidden, for the sidebar."""
+    """``toctree``, with its options, drawn as cards. The toctree stays, hidden, for the sidebar,
+    unless ``:links-only:``, which only links to the pages (like nbsphinx's ``nblinkgallery``), so a
+    landing page can show a few that sit elsewhere in the toctree."""
+
+    option_spec = {**TocTree.option_spec, "links-only": directives.flag}
 
     def run(self) -> list[nodes.Node]:
         result = super().run()
-        for toctree in result[0].findall(addnodes.toctree):
+        links_only = "links-only" in self.options
+        for toctree in list(result[0].findall(addnodes.toctree)):
             toctree["hidden"] = True
+            if links_only:
+                toctree.parent.remove(toctree)
             node = gallery(caption=toctree.get("caption"), entries=list(toctree["entries"]))
             self.env.sp_gallery_pages.setdefault(self.env.docname, set()).update(
                 ref for _, ref in toctree["entries"] if ref in self.env.found_docs
