@@ -8,7 +8,7 @@ stylesheets = [
 pygments_style = { default = "sphinx", dark = "github-dark" }
 
 [options]
-# rtd, alabaster, or none (set the --sp-* variables yourself); see shibuya_page.LOOKS
+# rtd, alabaster, pydata, or none (set the --sp-* variables yourself); see shibuya_page.LOOKS
 look = "rtd"
 # "auto" loads the look's fonts; or a stylesheet URL that loads your own; or "" for none
 webfonts = "auto"
@@ -18,3 +18,6 @@ prune_page_headings = "true"
 external_links_new_tab = "true"
 # notebook pages get a Download link for their source, at the end of the breadcrumbs
 download_notebooks = "true"
+# notebook pages get a Run link, before Download, to this page on running them: a docname (with an
+# optional #anchor) or a URL; "" for none
+run_notebooks = ""

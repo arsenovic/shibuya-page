@@ -10,7 +10,7 @@ It adds:
   (pydata-sphinx-theme's docs, as NumPy and SciPy use: system fonts, underlined links), each a
   palette, fonts and styling, with a dark mode. Change any color or font with a CSS variable.
   See them all in the [demo](https://arsenovic.github.io/shibuya-page/), which has a switcher.
-- **Breadcrumbs** above each page, with a **Download** link on notebook pages.
+- **Breadcrumbs** above each page, with **Run** and **Download** links on notebook pages.
 - **A thumbnail gallery** of pages (`shibuya_page.gallery`), for notebooks from MyST-NB or any
   other source.
 - **Landing-page classes**: a two-column features list, cards, a figure beside text.
@@ -56,6 +56,7 @@ shibuya-page's options sit beside Shibuya's in `html_theme_options`.
 | `prune_page_headings`    | `True`          | The left sidebar leaves out a page's own headings (the right sidebar lists them), but keeps headings that group other pages. |
 | `external_links_new_tab` | `True`          | Links that leave the site open in a new tab. |
 | `download_notebooks`     | `True`          | Notebook pages get a Download link for their source at the end of the breadcrumbs. Needs `html_copy_source` (on by default). |
+| `run_notebooks`          | `""`            | Notebook pages get a Run link, before Download, to a page on running them: a docname, optionally with an `#anchor` (`"examples/running"`), or a URL. |
 
 Code is highlighted with the look's Pygments styles: `sphinx` and `github-dark` (light and dark)
 for rtd and alabaster, and `a11y-high-contrast-light` and `-dark` for pydata, as it uses. Set
@@ -171,7 +172,7 @@ An emphasized part of the page title is a subtitle: `# Name *— what it does*`.
 ## Templates
 
 The theme replaces two of Shibuya's templates: `components/breadcrumbs.html` (a copy of Shibuya
-2026.7.12's, with the Download link) and `partials/webfonts.html`. A project's own `_templates`
+2026.7.12's, with the Run and Download links) and `partials/webfonts.html`. A project's own `_templates`
 still win over both.
 
 ## Development

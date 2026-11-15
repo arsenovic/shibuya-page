@@ -1,5 +1,5 @@
 {#- Shibuya 2026.7.12's components/breadcrumbs.html, plus an sp-home class on the home page and a
-    Download link on notebook pages. -#}
+    Run and Download links on notebook pages. -#}
 {%- if meta and meta.hide_breadcrumbs == "true" -%}
   {% set hide_breadcrumbs = True %}
 {%- elif theme_hide_breadcrumbs -%}
@@ -43,6 +43,9 @@
       {%- endblock -%}
     </ol>
     {#- shibuya-page: set by shibuya_page._on_page_context. #}
+    {%- if sp_run %}
+    <a class="sp-run" href="{{ sp_run }}">Run</a>
+    {%- endif %}
     {%- if sp_download %}
     <a class="sp-download" href="{{ sp_download.url }}" download="{{ sp_download.filename }}">Download</a>
     {%- endif %}

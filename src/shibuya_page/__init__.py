@@ -88,16 +88,25 @@ def _on_page_context(
     app: Sphinx, pagename: str, templatename: str, context: dict[str, Any], doctree: Any
 ) -> None:
     context["sp_download"] = None
-    if doctree is None or not _uses_theme(app) or not _flag(_options(app)["download_notebooks"]):
+    context["sp_run"] = None
+    if doctree is None or not _uses_theme(app) or not _is_notebook(app, pagename, context):
         return
+    options = _options(app)
     sourcename = context.get("sourcename")
-    if not sourcename or not _is_notebook(app, pagename, context):
-        return
-    # html_copy_source puts every source under _sources/, as <name><suffix>.txt by default
-    context["sp_download"] = {
-        "url": context["pathto"](f"_sources/{sourcename}", 1),
-        "filename": posixpath.basename(pagename) + context.get("page_source_suffix", ""),
-    }
+    if sourcename and _flag(options["download_notebooks"]):
+        # html_copy_source puts every source under _sources/, as <name><suffix>.txt by default
+        context["sp_download"] = {
+            "url": context["pathto"](f"_sources/{sourcename}", 1),
+            "filename": posixpath.basename(pagename) + context.get("page_source_suffix", ""),
+        }
+    run = options["run_notebooks"]
+    if run:
+        # a page of these docs, maybe with an #anchor, or a URL
+        if "://" in run:
+            context["sp_run"] = run
+        else:
+            docname, _, anchor = run.partition("#")
+            context["sp_run"] = context["pathto"](docname) + (f"#{anchor}" if anchor else "")
 
 
 def setup(app: Sphinx) -> dict[str, Any]:

@@ -199,17 +199,20 @@ html,
 }
 
 .sy-breadcrumbs ol a,
+.sy-breadcrumbs .sp-run,
 .sy-breadcrumbs .sp-download {
   color: var(--sp-link);
 }
 
 .sy-breadcrumbs ol a:hover,
+.sy-breadcrumbs .sp-run:hover,
 .sy-breadcrumbs .sp-download:hover {
   color: var(--sp-link-hover);
   text-decoration: underline;
 }
 
-/* The Download link at the right end of a notebook page's breadcrumbs. */
+/* The Run and Download links at the right end of a notebook page's breadcrumbs. */
+.sy-breadcrumbs .sp-run,
 .sy-breadcrumbs .sp-download {
   margin-left: 1rem;
   white-space: nowrap;
