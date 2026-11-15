@@ -1,0 +1,211 @@
+/* The pydata look: pydata-sphinx-theme's own docs, as of 0.24. The same colors and styling as the
+   scipy look (SciPy uses an older pydata-sphinx-theme), with pydata's newer system font stacks. */
+
+:root {
+  --sp-font-text: system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    "Noto Color Emoji";
+  --sp-font-heading: var(--sp-font-text);
+  --sp-font-mono: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, "DejaVu Sans Mono",
+    monospace;
+
+  --sp-desk: #eceef1;
+  --sp-scroll-thumb: #c9cfd6;
+  --sp-page: #ffffff;
+  --sp-page-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.08), 0 0.5rem 1.5rem rgba(0, 0, 0, 0.06);
+
+  --sp-text: #222832;
+  --sp-bold: #14181e;
+  --sp-light: #48566b;
+  --sp-link: #0a7d91;
+  --sp-link-hover: #8045e5;
+  --sp-caption: #222832;
+  --sp-rule: #d1d5da;
+  --sp-card-border: #d1d5da;
+  --sp-foot-text: #48566b;
+
+  --sp-code-block-bg: #f3f4f5;
+  --sp-code-block-text: #080808;
+  --sp-code-bg: #f3f4f5;
+  --sp-code-text: #912583;
+  --sp-code-link: #085d6c;
+  --sp-code-border: #d1d5da;
+
+  --sp-sidebar-link: #48566b;
+  --sp-sidebar-link-hover: var(--sp-link);
+
+  --sp-nav-bg: #ffffff;
+  --sp-nav-text: #48566b;
+  --sp-nav-hover: var(--sp-link);
+  --sp-nav-search-bg: #f3f4f5;
+
+  --sp-note-title: #276be9;
+  --sp-note-title-bg: #dce7fc;
+  --sp-tip-title: #00843f;
+  --sp-tip-title-bg: #d6ece1;
+  --sp-warn-title: #f66a0a;
+  --sp-warn-title-bg: #f8e3d0;
+  --sp-danger-title: #d72d47;
+  --sp-danger-title-bg: #f9e1e4;
+  --sp-sig-name: #912583;
+}
+
+/* Dark mode: a near-black page, and the teal and purple lightened. */
+html.dark {
+  --sp-desk: #0d1014;
+  --sp-scroll-thumb: #48566b;
+  --sp-page: #14181e;
+  --sp-page-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.3), 0 0.5rem 1.5rem rgba(0, 0, 0, 0.25);
+
+  --sp-text: #ced6dd;
+  --sp-bold: #f3f4f5;
+  --sp-light: #9ca4af;
+  --sp-link: #3fb1c5;
+  --sp-link-hover: #9c5ffd;
+  --sp-caption: #ced6dd;
+  --sp-rule: #48566b;
+  --sp-card-border: #48566b;
+  --sp-foot-text: #9ca4af;
+
+  --sp-code-bg: #29313d;
+  --sp-code-text: #f3c7ee;
+  --sp-code-link: #3fb1c5;
+  --sp-code-border: #48566b;
+
+  --sp-sidebar-link: #9ca4af;
+
+  --sp-nav-bg: #222832;
+  --sp-nav-text: #ced6dd;
+  --sp-nav-search-bg: #29313d;
+
+  --sp-note-title: #79a3f2;
+  --sp-note-title-bg: #06245d;
+  --sp-tip-title: #5fb488;
+  --sp-tip-title-bg: #002f17;
+  --sp-warn-title: #ff9245;
+  --sp-warn-title-bg: #652a02;
+  --sp-danger-title: #e78894;
+  --sp-danger-title-bg: #4e111b;
+  --sp-sig-name: #f3c7ee;
+}
+
+/* The navbar is light, so its search box gets a border instead of a tint. */
+.sy-head .searchbox input {
+  background-color: var(--sp-nav-search-bg);
+  border: 1px solid var(--sp-rule);
+}
+
+/* Headings: semibold, without rules. */
+.yue h1,
+.yue h2,
+.yue h3,
+.yue h4 {
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.yue h1 {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.yue h2 {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+/* Links are underlined, more thickly on hover. */
+.yue a {
+  text-decoration: underline;
+  text-decoration-thickness: max(1px, 0.0625rem);
+  text-underline-offset: 0.1578em;
+}
+
+.yue a:hover {
+  text-decoration-thickness: max(3px, 0.1875rem, 0.12em);
+  text-decoration-skip-ink: none;
+}
+
+/* Code blocks: a grey box with a thin border and rounded corners. */
+.highlight > pre,
+pre.literal-block {
+  font-size: 0.875em;
+  line-height: 1.5;
+  padding: 1rem;
+  border: 1px solid var(--sp-rule);
+  border-radius: 0.25rem;
+}
+
+/* Inline code: magenta on grey, with a thin border; teal when it's a link. */
+.yue code.literal {
+  font-weight: 400;
+  font-size: 0.875em;
+  padding: 0.1rem 0.25rem;
+  border: 1px solid var(--sp-code-border);
+  border-radius: 0.25rem;
+}
+
+.yue a code.literal,
+.yue a code.xref {
+  color: var(--sp-code-link);
+  font-weight: 700;
+}
+
+/* API signatures: monospace, with the name in the inline-code color and no band behind them. */
+.yue dl.py > dt {
+  font-family: var(--sp-font-mono);
+  background: none;
+  border: 0;
+}
+
+.yue dl.py > dt .sig-name {
+  color: var(--sp-sig-name);
+}
+
+.yue dl.py > dt em.sig-param {
+  font-style: italic;
+}
+
+.yue dl.py > dt em.sig-param .n {
+  font-weight: 700;
+}
+
+/* Admonitions: on the page, with an edge and tinted title in the type's color (blue notes, green
+   tips, orange warnings, red dangers), and a soft shadow. */
+.yue .admonition {
+  border-radius: 0.25rem;
+  box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.1), 0 0 0.0625rem rgba(0, 0, 0, 0.1);
+}
+
+.yue .admonition.note,
+.yue .admonition.seealso,
+.yue .admonition.important {
+  --color-1: var(--sp-page);
+  --color-2: var(--sp-note-title-bg, var(--sp-note-title));
+  --color-3: var(--sp-note-title);
+  --color-4: var(--sp-text);
+}
+
+.yue .admonition.tip,
+.yue .admonition.hint {
+  --color-1: var(--sp-page);
+  --color-2: var(--sp-tip-title-bg, var(--sp-tip-title));
+  --color-3: var(--sp-tip-title);
+  --color-4: var(--sp-text);
+}
+
+.yue .admonition.warning,
+.yue .admonition.caution,
+.yue .admonition.attention {
+  --color-1: var(--sp-page);
+  --color-2: var(--sp-warn-title-bg, var(--sp-warn-title));
+  --color-3: var(--sp-warn-title);
+  --color-4: var(--sp-text);
+}
+
+.yue .admonition.danger,
+.yue .admonition.error {
+  --color-1: var(--sp-page);
+  --color-2: var(--sp-danger-title-bg, var(--sp-danger-title));
+  --color-3: var(--sp-danger-title);
+  --color-4: var(--sp-text);
+}

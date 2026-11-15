@@ -17,7 +17,6 @@
   --sp-light: #48566b;
   --sp-link: #0a7d91;
   --sp-link-hover: #8045e5;
-  --sp-heading: #0a7d91;
   --sp-caption: #222832;
   --sp-rule: #d1d5da;
   --sp-card-border: #d1d5da;
@@ -39,9 +38,13 @@
   --sp-nav-search-bg: #f3f4f5;
 
   --sp-note-title: #276be9;
-  --sp-note-bg: #dce7fc;
+  --sp-note-title-bg: #dce7fc;
+  --sp-tip-title: #00843f;
+  --sp-tip-title-bg: #d6ece1;
   --sp-warn-title: #f66a0a;
-  --sp-warn-bg: #f8e3d0;
+  --sp-warn-title-bg: #f8e3d0;
+  --sp-danger-title: #d72d47;
+  --sp-danger-title-bg: #f9e1e4;
   --sp-sig-name: #912583;
 }
 
@@ -57,7 +60,6 @@ html.dark {
   --sp-light: #9ca4af;
   --sp-link: #3fb1c5;
   --sp-link-hover: #9c5ffd;
-  --sp-heading: #3fb1c5;
   --sp-caption: #ced6dd;
   --sp-rule: #48566b;
   --sp-card-border: #48566b;
@@ -75,9 +77,13 @@ html.dark {
   --sp-nav-search-bg: #29313d;
 
   --sp-note-title: #79a3f2;
-  --sp-note-bg: #06245d;
+  --sp-note-title-bg: #06245d;
+  --sp-tip-title: #5fb488;
+  --sp-tip-title-bg: #002f17;
   --sp-warn-title: #ff9245;
-  --sp-warn-bg: #652a02;
+  --sp-warn-title-bg: #652a02;
+  --sp-danger-title: #e78894;
+  --sp-danger-title-bg: #4e111b;
   --sp-sig-name: #f3c7ee;
 }
 
@@ -87,7 +93,7 @@ html.dark {
   border: 1px solid var(--sp-rule);
 }
 
-/* Headings: semibold, without rules; the page title in the link color. */
+/* Headings: semibold, without rules. */
 .yue h1,
 .yue h2,
 .yue h3,
@@ -97,7 +103,6 @@ html.dark {
 }
 
 .yue h1 {
-  color: var(--sp-heading);
   border-bottom: 0;
   padding-bottom: 0;
 }
@@ -163,27 +168,43 @@ pre.literal-block {
   font-weight: 700;
 }
 
-/* Admonitions: on the page, with a colored left edge, a tinted title and a soft shadow. */
+/* Admonitions: on the page, with an edge and tinted title in the type's color (blue notes, green
+   tips, orange warnings, red dangers), and a soft shadow. */
 .yue .admonition {
-  --color-1: var(--sp-page);
-  --color-4: var(--sp-text);
   border-radius: 0.25rem;
   box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.1), 0 0 0.0625rem rgba(0, 0, 0, 0.1);
 }
 
 .yue .admonition.note,
 .yue .admonition.seealso,
+.yue .admonition.important {
+  --color-1: var(--sp-page);
+  --color-2: var(--sp-note-title-bg, var(--sp-note-title));
+  --color-3: var(--sp-note-title);
+  --color-4: var(--sp-text);
+}
+
 .yue .admonition.tip,
 .yue .admonition.hint {
-  --color-2: var(--sp-note-bg);
-  --color-3: var(--sp-note-title);
+  --color-1: var(--sp-page);
+  --color-2: var(--sp-tip-title-bg, var(--sp-tip-title));
+  --color-3: var(--sp-tip-title);
+  --color-4: var(--sp-text);
 }
 
 .yue .admonition.warning,
-.yue .admonition.danger,
 .yue .admonition.caution,
-.yue .admonition.attention,
-.yue .admonition.error {
-  --color-2: var(--sp-warn-bg);
+.yue .admonition.attention {
+  --color-1: var(--sp-page);
+  --color-2: var(--sp-warn-title-bg, var(--sp-warn-title));
   --color-3: var(--sp-warn-title);
+  --color-4: var(--sp-text);
+}
+
+.yue .admonition.danger,
+.yue .admonition.error {
+  --color-1: var(--sp-page);
+  --color-2: var(--sp-danger-title-bg, var(--sp-danger-title));
+  --color-3: var(--sp-danger-title);
+  --color-4: var(--sp-text);
 }

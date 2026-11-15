@@ -36,8 +36,12 @@
 
   --sp-note-bg: #e7f2fa;
   --sp-note-title: #6ab0de;
+  --sp-tip-bg: #dbfaf4;
+  --sp-tip-title: #1abc9c;
   --sp-warn-bg: #ffedcc;
   --sp-warn-title: #f0b37e;
+  --sp-danger-bg: #fdf3f2;
+  --sp-danger-title: #f29f97;
   --sp-sig-bg: #e7f2fa;
   --sp-sig-border: #6ab0de;
   --sp-sig-text: #2980b9;
@@ -73,8 +77,12 @@ html.dark {
 
   --sp-note-bg: #1d2b38;
   --sp-note-title: #2f6d97;
+  --sp-tip-bg: #15302b;
+  --sp-tip-title: #138a72;
   --sp-warn-bg: #3a2f1f;
   --sp-warn-title: #9a6a3c;
+  --sp-danger-bg: #3b2224;
+  --sp-danger-title: #a94442;
   --sp-sig-bg: #1d2b38;
   --sp-sig-border: #2f6d97;
   --sp-sig-text: #8cc8ee;
@@ -139,20 +147,38 @@ html:not(.dark) .highlight > pre {
   border-left: 3px solid var(--sp-member-border);
 }
 
-/* Admonitions, as rtd draws them: a tinted body under a solid title bar. */
+/* Admonitions, as rtd draws them: a tinted body under a solid title bar in the type's color:
+   blue notes, green tips, orange warnings, red dangers. */
 .yue .admonition.note,
 .yue .admonition.seealso,
+.yue .admonition.important {
+  --color-1: var(--sp-note-bg);
+  --color-2: var(--sp-note-title-bg, var(--sp-note-title));
+  --color-3: var(--sp-note-title);
+  --color-4: #ffffff;
+}
+
 .yue .admonition.tip,
 .yue .admonition.hint {
-  --color-1: var(--sp-note-title);
-  background-color: var(--sp-note-bg);
+  --color-1: var(--sp-tip-bg);
+  --color-2: var(--sp-tip-title-bg, var(--sp-tip-title));
+  --color-3: var(--sp-tip-title);
+  --color-4: #ffffff;
 }
 
 .yue .admonition.warning,
-.yue .admonition.danger,
 .yue .admonition.caution,
-.yue .admonition.attention,
+.yue .admonition.attention {
+  --color-1: var(--sp-warn-bg);
+  --color-2: var(--sp-warn-title-bg, var(--sp-warn-title));
+  --color-3: var(--sp-warn-title);
+  --color-4: #ffffff;
+}
+
+.yue .admonition.danger,
 .yue .admonition.error {
-  --color-1: var(--sp-warn-title);
-  background-color: var(--sp-warn-bg);
+  --color-1: var(--sp-danger-bg);
+  --color-2: var(--sp-danger-title-bg, var(--sp-danger-title));
+  --color-3: var(--sp-danger-title);
+  --color-4: #ffffff;
 }

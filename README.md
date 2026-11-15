@@ -6,9 +6,10 @@ theme, so every Shibuya option still works.
 
 It adds:
 
-- **Looks**: `rtd` (sphinx_rtd_theme's blues, code and API signatures), `alabaster`, and `scipy`
-  (SciPy's docs: pydata-sphinx-theme's colors, system fonts, underlined links), each a palette,
-  fonts and styling, with a dark mode. Change any color or font with a CSS variable.
+- **Looks**: `rtd` (sphinx_rtd_theme's blues, code and API signatures), `alabaster`, `scipy`
+  (SciPy's docs: pydata-sphinx-theme's colors, system fonts, underlined links), and `pydata`
+  (pydata-sphinx-theme's own docs: the same, in its newer system fonts), each a palette, fonts and
+  styling, with a dark mode. Change any color or font with a CSS variable.
   See them all in the [demo](https://arsenovic.github.io/shibuya-page/), which has a switcher.
 - **Breadcrumbs** above each page, with a **Download** link on notebook pages.
 - **A thumbnail gallery** of pages (`shibuya_page.gallery`), for notebooks from MyST-NB or any
@@ -51,14 +52,14 @@ shibuya-page's options sit beside Shibuya's in `html_theme_options`.
 
 | Option                   | Default         | Effect |
 | ------------------------ | --------------- | ------ |
-| `look`                   | `"rtd"`         | `"rtd"`, `"alabaster"`, `"scipy"`, or `"none"` to set every `--sp-*` variable yourself. |
+| `look`                   | `"rtd"`         | `"rtd"`, `"alabaster"`, `"scipy"`, `"pydata"`, or `"none"` to set every `--sp-*` variable yourself. |
 | `webfonts`               | `"auto"`        | `"auto"` loads the look's fonts. Or a stylesheet URL that loads your own, named with `--sp-font-*`; or `""` for none. |
 | `prune_page_headings`    | `True`          | The left sidebar leaves out a page's own headings (the right sidebar lists them), but keeps headings that group other pages. |
 | `external_links_new_tab` | `True`          | Links that leave the site open in a new tab. |
 | `download_notebooks`     | `True`          | Notebook pages get a Download link for their source at the end of the breadcrumbs. Needs `html_copy_source` (on by default). |
 
 Code is highlighted with the look's Pygments styles: `sphinx` and `github-dark` (light and dark)
-for rtd and alabaster, and `a11y-high-contrast-light` and `-dark` for scipy, as SciPy uses. Set
+for rtd and alabaster, and `a11y-high-contrast-light` and `-dark` for scipy and pydata, as they use. Set
 `pygments_style` in `conf.py` to choose your own.
 
 ## Colors and fonts
@@ -91,7 +92,8 @@ html.dark {
 | `--sp-code-bg`, `--sp-code-text`, `--sp-code-border` | Inline code |
 | `--sp-sidebar-link`, `--sp-sidebar-link-hover` | Sidebar links |
 | `--sp-nav-bg`, `--sp-nav-text`, `--sp-nav-hover` | The navbar |
-| `--sp-note-*`, `--sp-warn-*`, `--sp-sig-*`, `--sp-member-*` | Admonitions and API signatures, in the looks that style them |
+| `--sp-note-*`, `--sp-tip-*`, `--sp-warn-*`, `--sp-danger-*` | Admonitions, by type, in the looks that color them |
+| `--sp-sig-*`, `--sp-member-*` | API signatures, in the looks that style them |
 | `--sp-font-text`, `--sp-font-heading`, `--sp-font-mono` | Fonts |
 | `--sp-logo-size`, `--sp-page-radius` | The logo's height, and the page's corners |
 | `--sp-gallery-placeholder` | The image on gallery cards for pages without one, such as `url("logo.svg")` |
