@@ -110,6 +110,18 @@ links, headings and admonitions. Copying `rtd.css` is the easiest start.
 reasonable-docs-template in every look, with a switcher, into `_demo/site` (`just serve-demo` serves
 it). The CI publishes that demo.
 
+## Choosing a look
+
+To see your own docs in every look, with a menu in the corner that switches between them:
+
+```sh
+python -m shibuya_page.looks docs docs/_build/looks --serve
+```
+
+It builds the docs once per look, into `docs/_build/looks/<look>/`, and serves them at
+http://127.0.0.1:8000 (`--serve 8001` for another port). Other options, such as `-W`, go to
+sphinx-build. Then set the one you like as `look` in `conf.py`.
+
 ## Gallery
 
 `shibuya_page.gallery` adds a `gallery` directive: a toctree, with the same options, drawn as a grid

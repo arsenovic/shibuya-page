@@ -1,5 +1,5 @@
-// The demo's look switcher: a menu in the corner that opens this page in another look. Each look is
-// a copy of the site in its own folder, /<look>/, so switching swaps that part of the address.
+// The look switcher that `python -m shibuya_page.looks` adds: a menu in the corner that opens this page
+// in another look. Each look is a copy of the site in its own folder, /<look>/, so switching swaps that part of the address.
 (() => {
   const parts = location.pathname.split("/");
   const at = parts.findIndex((part) => SP_LOOKS.includes(part));

@@ -42,7 +42,7 @@ jobs:
       - if: matrix.shibuya == 'newest'
         run: uv lock --upgrade-package shibuya
         working-directory: reasonable-docs-template
-      - run: uv run --group docs python ../shibuya-page/demo/build.py . ../site
+      - run: uv run --group docs python -m shibuya_page.looks docs ../site -W
         working-directory: reasonable-docs-template
       - if: matrix.shibuya == 'locked'
         uses: actions/upload-pages-artifact@v3
