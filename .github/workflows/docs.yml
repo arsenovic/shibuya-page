@@ -1,0 +1,61 @@
+# Build reasonable-docs-template with this theme, in each palette and against the newest Shibuya,
+# and publish the default build on GitHub Pages as the theme's demo.
+# Turn Pages on first: Settings > Pages > Source: GitHub Actions.
+name: docs
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+  # weekly, to catch a Shibuya release that changes a template this theme copies
+  schedule:
+    - cron: "0 6 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        palette: [rtd, alabaster]
+        shibuya: [locked, newest]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: shibuya-page
+      # The template finds shibuya-page beside it.
+      - uses: actions/checkout@v4
+        with:
+          repository: arsenovic/reasonable-docs-template
+          path: reasonable-docs-template
+      - uses: astral-sh/setup-uv@v6
+      - if: matrix.shibuya == 'newest'
+        run: uv lock --upgrade-package shibuya
+        working-directory: reasonable-docs-template
+      - run: >
+          uv run --group docs sphinx-build -W --keep-going -b html
+          -D html_theme_options.palette=${{ matrix.palette }}
+          docs docs/_build/html
+        working-directory: reasonable-docs-template
+      - if: matrix.palette == 'rtd' && matrix.shibuya == 'locked'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: reasonable-docs-template/docs/_build/html
+
+  deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

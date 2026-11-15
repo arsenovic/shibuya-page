@@ -1,0 +1,154 @@
+/* The sphinx_rtd_theme palette, with rtd's code cells, inline code, API signatures and admonitions. */
+
+:root {
+  --sp-desk: #e9e7e3;
+  --sp-scroll-thumb: #c4c0b9;
+  --sp-page: #fcfcfc;
+  --sp-page-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), 0 8px 24px rgba(0, 0, 0, 0.08);
+
+  --sp-text: #404040;
+  --sp-bold: #000000;
+  --sp-light: #606060;
+  --sp-link: #2980b9;
+  --sp-link-hover: #3091d1;
+  --sp-caption: #1f4e8c;
+  --sp-rule: #e1e4e5;
+  --sp-card-border: #e1e4e5;
+  --sp-foot-text: #808080;
+
+  /* Code blocks keep the green of the sphinx pygments style. */
+  --sp-code-block-bg: #eeffcc;
+  --sp-code-block-text: #333333;
+  --sp-code-bg: #ffffff;
+  --sp-code-text: #e74c3c;
+  --sp-code-border: #e1e4e5;
+
+  --sp-sidebar-link: #404040;
+  --sp-sidebar-link-hover: var(--sp-link);
+
+  --sp-nav-bg: #2980b9;
+  --sp-nav-text: #ffffff;
+  --sp-nav-hover: #d6eaf8;
+
+  --sp-note-bg: #e7f2fa;
+  --sp-note-title: #6ab0de;
+  --sp-warn-bg: #ffedcc;
+  --sp-warn-title: #f0b37e;
+  --sp-sig-bg: #e7f2fa;
+  --sp-sig-border: #6ab0de;
+  --sp-sig-text: #2980b9;
+  --sp-member-bg: #f0f0f0;
+  --sp-member-border: #cccccc;
+}
+
+/* A dim desk, a slate page, and the rtd blue lightened. */
+html.dark {
+  --sp-desk: #16181b;
+  --sp-scroll-thumb: #3a3f46;
+  --sp-page: #212429;
+  --sp-page-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.3);
+
+  --sp-text: #d0d4d9;
+  --sp-bold: #ffffff;
+  --sp-light: #a3a9b0;
+  --sp-link: #5dade2;
+  --sp-link-hover: #8cc8ee;
+  --sp-caption: #8cc8ee;
+  --sp-rule: #3a3f46;
+  --sp-card-border: #3a3f46;
+
+  --sp-code-bg: #2c3138;
+  --sp-code-text: #ff8a7d;
+  --sp-code-border: #3a3f46;
+
+  --sp-sidebar-link: #bfc4ca;
+
+  --sp-nav-bg: #1c4f72;
+  --sp-nav-text: #e6eef4;
+  --sp-nav-hover: #ffffff;
+
+  --sp-note-bg: #1d2b38;
+  --sp-note-title: #2f6d97;
+  --sp-warn-bg: #3a2f1f;
+  --sp-warn-title: #9a6a3c;
+  --sp-sig-bg: #1d2b38;
+  --sp-sig-border: #2f6d97;
+  --sp-sig-text: #8cc8ee;
+  --sp-member-bg: #2a2e34;
+  --sp-member-border: #3a3f46;
+}
+
+/* Code cells, as rtd draws them: a thin border and square corners. */
+.highlight > pre,
+pre.literal-block {
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", Courier, monospace;
+  font-size: 12px;
+  line-height: 1.4;
+  padding: 12px;
+}
+
+html:not(.dark) .highlight > pre {
+  border: 1px solid var(--sp-code-border);
+}
+
+/* Inline code, as rtd draws it: red on white with a thin border. */
+.yue code.literal {
+  font-weight: 400;
+  font-size: 0.8em;
+  padding: 2px 5px;
+  border: 1px solid var(--sp-code-border);
+  border-radius: 0;
+}
+
+/* Inline code that is a link keeps the link color, as in rtd. */
+.yue a code.literal,
+.yue a code.xref {
+  color: var(--sp-link);
+  border: 0;
+  background: none;
+  padding: 0;
+  font-weight: 700;
+}
+
+/* Links are underlined only on hover. */
+.yue a {
+  text-decoration: none;
+}
+
+.yue a:hover {
+  text-decoration: underline;
+}
+
+/* API signatures, in rtd's blue band; members in a grey one. */
+.yue dl.py.class > dt,
+.yue dl.py.function > dt,
+.yue dl.py.exception > dt {
+  background: var(--sp-sig-bg);
+  border-top: 3px solid var(--sp-sig-border);
+  color: var(--sp-sig-text);
+}
+
+.yue dl.py.method > dt,
+.yue dl.py.attribute > dt,
+.yue dl.py.property > dt {
+  background: var(--sp-member-bg);
+  border-left: 3px solid var(--sp-member-border);
+}
+
+/* Admonitions, as rtd draws them: a tinted body under a solid title bar. */
+.yue .admonition.note,
+.yue .admonition.seealso,
+.yue .admonition.tip,
+.yue .admonition.hint {
+  --color-1: var(--sp-note-title);
+  background-color: var(--sp-note-bg);
+}
+
+.yue .admonition.warning,
+.yue .admonition.danger,
+.yue .admonition.caution,
+.yue .admonition.attention,
+.yue .admonition.error {
+  --color-1: var(--sp-warn-title);
+  background-color: var(--sp-warn-bg);
+}

@@ -1,0 +1,9 @@
+{#- Replaces Shibuya's Inter webfonts: the fonts come from the webfonts option, and the font
+    families from layout.css, so a project's CSS can change them without outranking an inline style. -#}
+{%- if theme_webfonts %}
+{%- if theme_webfonts.startswith("https://fonts.googleapis.com/") %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+{%- endif %}
+<link href="{{ theme_webfonts }}" rel="stylesheet">
+{%- endif %}

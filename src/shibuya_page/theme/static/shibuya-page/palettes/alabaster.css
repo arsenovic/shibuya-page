@@ -1,0 +1,114 @@
+/* The alabaster palette, with alabaster's code cells, dotted links and admonitions. */
+
+:root {
+  --sp-desk: #e9e7e3;
+  --sp-scroll-thumb: #c4c0b9;
+  --sp-page: #ffffff;
+  --sp-page-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), 0 8px 24px rgba(0, 0, 0, 0.08);
+
+  --sp-text: #3e4349;
+  --sp-bold: #000000;
+  --sp-light: #555555;
+  --sp-link: #004b6b;
+  --sp-link-hover: #6d4100;
+  --sp-caption: #004b6b;
+  --sp-rule: #eeeeee;
+  --sp-card-border: #eeeeee;
+  --sp-foot-text: #888888;
+
+  /* Code blocks are cream. */
+  --sp-code-block-bg: #faf3e8;
+  --sp-code-block-text: #3e4349;
+  --sp-code-bg: #ecf0f3;
+  --sp-code-text: #222222;
+
+  --sp-sidebar-link: #444444;
+  --sp-sidebar-link-hover: var(--sp-link-hover);
+
+  /* The navbar is alabaster's charcoal text color. */
+  --sp-nav-bg: #3e4349;
+  --sp-nav-text: #ffffff;
+  --sp-nav-hover: #b9dcec;
+
+  --sp-note-bg: #eeeeee;
+  --sp-note-border: #cccccc;
+  --sp-warn-bg: #ffcccc;
+  --sp-warn-border: #ffaaaa;
+}
+
+/* A dim desk, a slate page, and alabaster's teal and brown lightened to keep their hue. */
+html.dark {
+  --sp-desk: #16181b;
+  --sp-scroll-thumb: #3a3f46;
+  --sp-page: #212429;
+  --sp-page-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.3);
+
+  --sp-text: #cfd3d8;
+  --sp-bold: #ffffff;
+  --sp-light: #a3a9b0;
+  --sp-link: #6fbcdf;
+  --sp-link-hover: #e0a85e;
+  --sp-caption: #6fbcdf;
+  --sp-rule: #33373d;
+  --sp-card-border: #33373d;
+
+  --sp-code-bg: #2c3138;
+  --sp-code-text: #e6e8eb;
+
+  --sp-sidebar-link: #bfc4ca;
+
+  --sp-nav-bg: #0b0c0e;
+  --sp-nav-text: #e6e8eb;
+  --sp-nav-hover: #6fbcdf;
+
+  --sp-note-bg: #2a2e34;
+  --sp-note-border: #454a52;
+  --sp-warn-bg: #3d2526;
+  --sp-warn-border: #6b3a3b;
+}
+
+/* Code cells, as alabaster draws them. */
+.highlight > pre,
+pre.literal-block {
+  font-family: Consolas, Menlo, "DejaVu Sans Mono", "Bitstream Vera Sans Mono", monospace;
+  font-size: 0.9em;
+  line-height: 1.3em;
+  padding: 7px 30px;
+}
+
+.yue code {
+  font-weight: 400;
+}
+
+/* Headings are heavier. */
+.yue h1 {
+  font-weight: 900;
+  letter-spacing: -0.5px;
+}
+
+/* alabaster underlines links with a dotted rule. */
+.yue a {
+  text-decoration-style: dotted;
+}
+
+.yue a:hover {
+  text-decoration-color: var(--sp-link-hover);
+}
+
+/* Admonitions, as alabaster drew them */
+.yue .admonition.note,
+.yue .admonition.seealso,
+.yue .admonition.tip,
+.yue .admonition.hint {
+  background-color: var(--sp-note-bg);
+  border-color: var(--sp-note-border);
+}
+
+.yue .admonition.warning,
+.yue .admonition.danger,
+.yue .admonition.caution,
+.yue .admonition.attention,
+.yue .admonition.error {
+  background-color: var(--sp-warn-bg);
+  border-color: var(--sp-warn-border);
+}

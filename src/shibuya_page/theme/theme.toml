@@ -1,0 +1,20 @@
+[theme]
+inherit = "shibuya"
+stylesheets = [
+    "shibuya.css",
+    "shibuya-page/layout.css",
+    "shibuya-page/components.css",
+]
+pygments_style = { default = "sphinx", dark = "github-dark" }
+
+[options]
+# rtd, alabaster, or none (set the --sp-* variables yourself)
+palette = "rtd"
+# a stylesheet URL for the fonts named by --sp-font-text, --sp-font-heading and --sp-font-mono; empty for none
+webfonts = "https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700;900&family=Lato:ital,wght@0,400;0,700;1,400&family=Roboto+Mono:wght@400;700&display=swap"
+# the left sidebar leaves out a page's own headings (the right sidebar lists those)
+prune_page_headings = "true"
+# links that leave the site open in a new tab
+external_links_new_tab = "true"
+# notebook pages get a Download link for their source, at the end of the breadcrumbs
+download_notebooks = "true"

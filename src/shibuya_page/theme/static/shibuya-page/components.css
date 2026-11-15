@@ -1,0 +1,177 @@
+/* Opt-in pieces for landing pages. Give an element the class with rst-class (reStructuredText),
+   or with an attribute or a {div} block (MyST). */
+
+/* sp-features: a list of short groups, flowing down two columns, so short groups don't leave gaps.
+   Each item is a bold label, optionally with its own sublist. */
+.yue ul.sp-features {
+  columns: 2 16rem;
+  column-gap: 2rem;
+  padding-left: 0;
+  list-style: none;
+  margin-top: 0.75rem;
+  line-height: 1.5;
+}
+
+.yue ul.sp-features > li {
+  /* An inline block can't be split across columns, which break-inside alone doesn't guarantee. */
+  display: inline-block;
+  width: 100%;
+  break-inside: avoid;
+  margin: 0 0 0.6rem;
+}
+
+.yue ul.sp-features > li > p {
+  margin: 0;
+}
+
+.yue ul.sp-features > li:has(> ul) > p {
+  font-family: var(--sy-f-heading);
+  font-weight: 700;
+}
+
+.yue ul.sp-features > li > ul {
+  margin: 0.1rem 0 0;
+  padding-left: 1.1rem;
+}
+
+.yue ul.sp-features li li,
+.yue ul.sp-features li li > p {
+  margin: 0;
+}
+
+/* sp-side-by-side: a block's children in two columns, text then a figure, stacked on phones. */
+.yue .sp-side-by-side {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.yue .sp-side-by-side > * {
+  min-width: 0;
+}
+
+.yue .sp-side-by-side > * > :first-child {
+  margin-top: 0;
+}
+
+.yue .sp-side-by-side > * > :last-child {
+  margin-bottom: 0;
+}
+
+.yue .sp-side-by-side img {
+  max-width: min(100%, 260px);
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .yue .sp-side-by-side {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .yue .sp-side-by-side > * {
+    width: 100%;
+  }
+}
+
+/* sp-cards: a list-table becomes a grid of cards, one per cell, each an image over a caption. */
+.yue table.sp-cards,
+.yue table.sp-cards tbody {
+  display: block;
+  width: 100%;
+  border: 0;
+  font-size: 1em;
+}
+
+.yue table.sp-cards tbody {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 13rem), 1fr));
+  gap: 1rem;
+}
+
+.yue table.sp-cards tr {
+  display: contents;
+}
+
+.yue table.sp-cards td {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  border: 1px solid var(--sp-card-border);
+  border-radius: 6px;
+  overflow: hidden;
+  background: transparent;
+}
+
+.yue table.sp-cards colgroup,
+.yue table.sp-cards thead {
+  display: none;
+}
+
+.yue table.sp-cards td a {
+  display: block;
+}
+
+.yue table.sp-cards td img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  margin: 0;
+  transition: transform 0.2s ease;
+}
+
+.yue table.sp-cards td:hover img {
+  transform: scale(1.03);
+}
+
+.yue table.sp-cards td p {
+  margin: 0;
+  padding: 0.5rem 0.75rem;
+  font-weight: 700;
+  font-size: 0.95em;
+}
+
+/* sp-title-image: a section whose h1 is replaced by an image (a title graphic). The heading stays
+   for the browser title and screen readers. */
+.yue section.sp-title-image > h1 {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.yue img.sp-title {
+  display: block;
+  width: min(100%, 322px);
+  margin: 0.5rem auto 2rem;
+}
+
+/* sp-light-only and sp-dark-only: show an image in one color mode. */
+html.dark .yue .sp-light-only,
+html:not(.dark) .yue .sp-dark-only {
+  display: none;
+}
+
+/* sp-invert-dark: a figure with black lines on a transparent background turns its lines white in
+   dark mode; the hues turn back round so colored traces keep their colors. */
+html.dark .yue img.sp-invert-dark,
+html.dark .yue .sp-invert-dark img {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/* sp-logos: a section's images float right of the text beside them, as a list of users' logos. */
+.yue section.sp-logos {
+  display: flow-root;
+}
+
+.yue section.sp-logos img {
+  float: right;
+  max-width: 180px;
+  max-height: 110px;
+  object-fit: contain;
+  margin: 0.25rem 0 1rem 1.5rem;
+}
