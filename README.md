@@ -11,6 +11,8 @@ It adds:
   palette, fonts and styling, with a dark mode. Change any color or font with a CSS variable.
   See them all in the [demo](https://arsenovic.github.io/shibuya-page/), which has a switcher.
 - **Breadcrumbs** above each page, with **Run** and **Download** links on notebook pages.
+- **Fold code**: a button above the right sidebar's table of contents folds every code block on
+  the page, notebook outputs staying, each into a bar that opens just that block.
 - **A thumbnail gallery** of pages (`shibuya_page.gallery`), for notebooks from MyST-NB or any
   other source.
 - **Landing-page classes**: a two-column features list, cards, a figure beside text.
@@ -57,6 +59,7 @@ shibuya-page's options sit beside Shibuya's in `html_theme_options`.
 | `external_links_new_tab` | `True`          | Links that leave the site open in a new tab. |
 | `download_notebooks`     | `True`          | Notebook pages get a Download link for their source at the end of the breadcrumbs. Needs `html_copy_source` (on by default). |
 | `run_notebooks`          | `""`            | Notebook pages get a Run link, before Download, to a page on running them: a docname, optionally with an `#anchor` (`"examples/running"`), or a URL. |
+| `fold_code`              | `True`          | Pages with code get a Fold code button above the right sidebar's table of contents. The choice holds across pages. If you set `html_sidebars`, list `"sidebars/fold-code.html"` before `"sidebars/localtoc.html"`. |
 
 Code is highlighted with the look's Pygments styles: `sphinx` and `github-dark` (light and dark)
 for rtd and alabaster, and `a11y-high-contrast-light` and `-dark` for pydata, as it uses. Set

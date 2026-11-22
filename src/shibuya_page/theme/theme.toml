@@ -6,6 +6,15 @@ stylesheets = [
     "shibuya-page/components.css",
 ]
 pygments_style = { default = "sphinx", dark = "github-dark" }
+# Shibuya's right sidebar, with the Fold code button above "On this page"
+sidebars = [
+    "sidebars/fold-code.html",
+    "sidebars/localtoc.html",
+    "sidebars/repo-stats.html",
+    "sidebars/edit-this-page.html",
+    "sidebars/carbon-ads.html",
+    "sidebars/ethical-ads.html",
+]
 
 [options]
 # rtd, alabaster, pydata, or none (set the --sp-* variables yourself); see shibuya_page.LOOKS
@@ -21,3 +30,5 @@ download_notebooks = "true"
 # notebook pages get a Run link, before Download, to this page on running them: a docname (with an
 # optional #anchor) or a URL; "" for none
 run_notebooks = ""
+# pages with code get a Fold code button above the right sidebar's table of contents
+fold_code = "true"

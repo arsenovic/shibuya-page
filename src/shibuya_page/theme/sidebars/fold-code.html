@@ -1,0 +1,5 @@
+{#- shibuya-page: above "On this page", a button that folds every code block on the page. sp_has_code is
+    set by shibuya_page._on_page_context. -#}
+{%- if sp_has_code %}
+<button class="sp-fold-code" type="button" aria-pressed="false"><span class="sp-fold">Fold code</span><span class="sp-unfold">Unfold code</span></button>
+{%- endif -%}

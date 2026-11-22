@@ -4,6 +4,7 @@ import posixpath
 from pathlib import Path
 from typing import Any
 
+from docutils import nodes
 from sphinx.application import Sphinx
 from sphinx.util import logging
 
@@ -75,6 +76,61 @@ def _on_builder_inited(app: Sphinx) -> None:
         app.add_css_file("shibuya-page/prune-page-headings.css", priority=300)
     if _flag(options["external_links_new_tab"]):
         app.add_js_file("shibuya-page/external-links.js")
+    if _flag(options["fold_code"]):
+        app.add_js_file("shibuya-page/fold-code.js")
+
+
+class sp_code_bar(nodes.Element):
+    """The bar a code block folds into: written before the block, which the bar shows and hides."""
+
+
+def _visit_code_bar(self: Any, node: sp_code_bar) -> None:
+    lines = node["lines"]
+    self.body.append(
+        '<button type="button" class="sp-code-bar" aria-expanded="false">'
+        f"Code · {lines} line{'' if lines == 1 else 's'}</button>"
+    )
+    raise nodes.SkipNode
+
+
+def _classes(node: nodes.Element) -> list[str]:
+    return node.get("classes", [])
+
+
+# a notebook's input cell (MyST-NB, nbsphinx) folds as a whole; its outputs never fold
+_INPUT = ("cell_input", "nbinput")
+_OUTPUT = ("cell_output", "nboutput")
+
+
+def _foldable(block: nodes.literal_block) -> nodes.Element | None:
+    """The element a code block folds as: its notebook input cell, the block itself, or None (an output,
+    or a cell MyST-NB hides already)."""
+    target: nodes.Element = block
+    parent = block.parent
+    while isinstance(parent, nodes.Element):
+        classes = _classes(parent)
+        if any(c in classes for c in _OUTPUT) or type(parent).__name__ == "HideCodeCellNode":
+            return None
+        if parent.get("hide_mode") in ("input", "input+output", "all"):
+            return None
+        if any(c in classes for c in _INPUT):
+            target = parent
+        parent = parent.parent
+    return target
+
+
+def _add_code_bars(app: Sphinx, doctree: nodes.document, docname: str) -> None:
+    """Write a bar before each code block, for the Fold code button, so the page doesn't move when it loads."""
+    if app.builder.format != "html" or not _uses_theme(app) or not _flag(_options(app)["fold_code"]):
+        return
+    targets: dict[int, tuple[nodes.Element, int]] = {}
+    for block in doctree.findall(nodes.literal_block):
+        target = _foldable(block)
+        if target is not None:
+            _, lines = targets.get(id(target), (target, 0))
+            targets[id(target)] = (target, lines + len(block.astext().rstrip("\n").split("\n")))
+    for target, lines in targets.values():
+        target.parent.insert(target.parent.index(target), sp_code_bar(lines=lines))
 
 
 def _is_notebook(app: Sphinx, pagename: str, context: dict[str, Any]) -> bool:
@@ -89,6 +145,12 @@ def _on_page_context(
 ) -> None:
     context["sp_download"] = None
     context["sp_run"] = None
+    context["sp_has_code"] = (
+        doctree is not None
+        and _uses_theme(app)
+        and _flag(_options(app)["fold_code"])
+        and doctree.next_node(sp_code_bar) is not None
+    )
     if doctree is None or not _uses_theme(app) or not _is_notebook(app, pagename, context):
         return
     options = _options(app)
@@ -116,4 +178,6 @@ def setup(app: Sphinx) -> dict[str, Any]:
     app.connect("builder-inited", _set_look_pygments, priority=400)
     app.connect("builder-inited", _on_builder_inited)
     app.connect("html-page-context", _on_page_context)
+    app.add_node(sp_code_bar, html=(_visit_code_bar, None))
+    app.connect("doctree-resolved", _add_code_bars)
     return {"version": __version__, "parallel_read_safe": True, "parallel_write_safe": True}

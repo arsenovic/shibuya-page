@@ -1,2 +1,8 @@
 {#- Replaces Shibuya's Inter webfonts and its inline font families: shibuya-page loads the look's
     fonts (or the webfonts option's) as a stylesheet, and the look names them in --sp-font-*. -#}
+{#- shibuya-page: Shibuya includes this partial in <head>, before the page is drawn. On a page with code,
+    fold it now if the reader folded code before, so the page doesn't show its code and then hide it once
+    fold-code.js loads at the end of <body>. #}
+{%- if sp_has_code %}
+<script>try{localStorage.getItem("sp-fold-code")==="folded"&&document.documentElement.classList.add("sp-code-folded")}catch(e){}</script>
+{%- endif %}

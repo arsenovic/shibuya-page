@@ -178,3 +178,60 @@ html.dark .yue .sp-invert-dark img {
   object-fit: contain;
   margin: 0.25rem 0 1rem 1.5rem;
 }
+
+/* Fold code: the button above the right sidebar's table of contents, and the bar each folded code
+   block becomes (written at build time; fold-code.js handles the clicks). */
+.sy-rside .sp-fold-code {
+  margin-bottom: 1rem;
+  padding: 0.2rem 0.6rem;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  color: var(--sp-sidebar-link);
+}
+
+/* its label follows the page, which the script in <head> may fold before the button is drawn */
+html.sp-code-folded .sy-rside .sp-fold,
+html:not(.sp-code-folded) .sy-rside .sp-unfold {
+  display: none;
+}
+
+.sy-rside .sp-fold-code:hover {
+  color: var(--sp-sidebar-link-hover);
+}
+
+.yue .sp-code-bar {
+  display: none;
+  width: 100%;
+  margin: 0.5rem 0;
+  padding: 0.3rem 0.75rem;
+  border: 1px dashed var(--sp-rule);
+  border-radius: 4px;
+  text-align: left;
+  font-family: var(--sp-font-mono);
+  font-size: 0.8rem;
+  color: var(--sp-light);
+}
+
+.yue .sp-code-bar::before {
+  content: "▸ ";
+}
+
+.yue .sp-code-bar[aria-expanded="true"]::before {
+  content: "▾ ";
+}
+
+.yue .sp-code-bar:hover {
+  color: var(--sp-link-hover);
+}
+
+/* Folded, each bar shows and the code block after it hides, until the bar opens it. On paper, all the code shows. */
+@media screen {
+  html.sp-code-folded .yue .sp-code-bar {
+    display: block;
+  }
+
+  html.sp-code-folded .yue .sp-code-bar[aria-expanded="false"] + * {
+    display: none;
+  }
+}
