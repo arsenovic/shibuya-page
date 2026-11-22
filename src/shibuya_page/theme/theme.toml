@@ -32,3 +32,6 @@ download_notebooks = "true"
 run_notebooks = ""
 # pages with code get a Fold code button above the right sidebar's table of contents
 fold_code = "true"
+# matplotlib's figures in notebooks run by the build: "svg", "retina" (2x PNG), a list such as
+# "svg,pdf", or "" to leave them alone (PNG)
+notebook_figures = "svg"
