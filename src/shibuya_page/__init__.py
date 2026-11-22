@@ -1,5 +1,6 @@
 """shibuya-page: the Shibuya Sphinx theme, laid out as a sheet of paper on a desk."""
 
+import os
 import posixpath
 from pathlib import Path
 from typing import Any
@@ -11,6 +12,7 @@ from sphinx.util import logging
 __version__ = "0.1.0"
 
 THEME_PATH = Path(__file__).parent / "theme"
+NOTEBOOK_STARTUP = Path(__file__).parent / "notebook_startup.py"
 
 LATO_ROBOTO = (
     "https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700;900"
@@ -57,6 +59,28 @@ def _set_look_pygments(app: Sphinx) -> None:
         app.builder.theme.pygments_style_default, app.builder.theme.pygments_style_dark = styles
 
 
+def _set_notebook_figures(formats: str) -> None:
+    """Have the notebook kernels this build starts draw matplotlib's figures in ``formats`` (e.g. "svg",
+    or "svg,pdf"), or leave them alone for "". Kernels inherit Sphinx's environment, and MyST-NB has no
+    other way to configure them, so this goes through PYTHONSTARTUP (notebook_startup.py), which then
+    runs any PYTHONSTARTUP set before."""
+    startup = str(NOTEBOOK_STARTUP)
+    current = os.environ.get("PYTHONSTARTUP", "")
+    if formats:
+        if current != startup:
+            os.environ["SHIBUYA_PAGE_PREVIOUS_PYTHONSTARTUP"] = current
+        os.environ["PYTHONSTARTUP"] = startup
+        os.environ["SHIBUYA_PAGE_FIGURE_FORMATS"] = formats
+    elif current == startup:
+        # set by an earlier build in this process (e.g. sphinx-autobuild); put the previous one back
+        previous = os.environ.pop("SHIBUYA_PAGE_PREVIOUS_PYTHONSTARTUP", "")
+        if previous:
+            os.environ["PYTHONSTARTUP"] = previous
+        else:
+            del os.environ["PYTHONSTARTUP"]
+        os.environ.pop("SHIBUYA_PAGE_FIGURE_FORMATS", None)
+
+
 def _on_builder_inited(app: Sphinx) -> None:
     if not _uses_theme(app):
         return
@@ -78,6 +102,11 @@ def _on_builder_inited(app: Sphinx) -> None:
         app.add_js_file("shibuya-page/external-links.js")
     if _flag(options["fold_code"]):
         app.add_js_file("shibuya-page/fold-code.js")
+    figures = options["notebook_figures"]
+    # theme.toml gives a string; conf.py may give a list, or False/None for none
+    if isinstance(figures, (list, tuple)):
+        figures = ",".join(figures)
+    _set_notebook_figures(str(figures or "").strip())
 
 
 class sp_code_bar(nodes.Element):

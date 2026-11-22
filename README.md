@@ -60,6 +60,7 @@ shibuya-page's options sit beside Shibuya's in `html_theme_options`.
 | `download_notebooks`     | `True`          | Notebook pages get a Download link for their source at the end of the breadcrumbs. Needs `html_copy_source` (on by default). |
 | `run_notebooks`          | `""`            | Notebook pages get a Run link, before Download, to a page on running them: a docname, optionally with an `#anchor` (`"examples/running"`), or a URL. |
 | `fold_code`              | `True`          | Pages with code get a Fold code button above the right sidebar's table of contents. The choice holds across pages. If you set `html_sidebars`, list `"sidebars/fold-code.html"` before `"sidebars/localtoc.html"`. |
+| `notebook_figures`       | `"svg"`         | matplotlib's figures in notebooks that the build runs (MyST-NB or nbsphinx): `"svg"`, `"retina"` (2x PNG), a list such as `"svg,pdf"`, or `""` to leave them alone (PNG). Set through each kernel's `PYTHONSTARTUP`, which still runs any set before. A notebook's own `%config InlineBackend.figure_formats` wins. Cached outputs (MyST-NB's `nb_execution_mode = "cache"`) keep their old format until the notebook re-runs. |
 
 Code is highlighted with the look's Pygments styles: `sphinx` and `github-dark` (light and dark)
 for rtd and alabaster, and `a11y-high-contrast-light` and `-dark` for pydata, as it uses. Set
